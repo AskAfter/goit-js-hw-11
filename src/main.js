@@ -10,7 +10,7 @@ const loader = document.querySelector('.loader');
 fetchSubmit.addEventListener('submit', event => {
   event.preventDefault();
   const searchRequest = searchInput.value;
-
+  const photoList = document.querySelector('.photo-list');
   loader.style.display = 'block';
 
   const searchParams = new URLSearchParams({
@@ -25,7 +25,9 @@ fetchSubmit.addEventListener('submit', event => {
   fetchPhotos(searchParams)
     .then(photos => {
       loader.style.display = 'none';
+      searchInput.value = '';
       if (photos.hits.length === 0) {
+        photoList.innerHTML = '';
         iziToast.error({
           title: 'Error',
           message:
@@ -42,4 +44,19 @@ fetchSubmit.addEventListener('submit', event => {
         message: `Something went wrong. Error: ${error.message}`,
       });
     });
+});
+
+iziToast.settings({
+  timeout: 10000,
+  position: 'topRight',
+  resetOnHover: true,
+  icon: 'material-icons',
+  transitionIn: 'flipInX',
+  transitionOut: 'flipOutX',
+  onOpening: function () {
+    // console.log('callback abriu!');
+  },
+  onClosing: function () {
+    // console.log('callback fechou!');
+  },
 });
