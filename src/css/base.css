@@ -84,7 +84,7 @@ main:has(.back-link) {
 .photo-list {
   display: flex;
   flex-wrap: wrap;
-  min-width: 1128px;
+  max-width: 1128px;
   list-style-type: none;
   padding: 0;
   margin: 0;
